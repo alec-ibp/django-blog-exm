@@ -23,17 +23,25 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+BASE_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.blog'
 ]
 
+THIRD_APPS = [
+    'import_export',
+    'ckeditor'
+]
 
+LOCAL_APPS = [
+    'apps.blog',
+]
+
+INSTALLED_APPS = BASE_APPS + THIRD_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -62,6 +70,14 @@ TEMPLATES = [
         },
     },
 ]
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+    },
+}
+
 
 WSGI_APPLICATION = 'django_blog.wsgi.application'
 
