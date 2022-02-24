@@ -40,16 +40,16 @@
               <a class="nav-link" href="{% url 'blog:home' %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about.html">General</a>
+              <a class="nav-link" href="{% url 'blog:general' %}">General</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="post.html">Tecnology</a>
+              <a class="nav-link" href="{% url 'blog:technology' %}">Technology</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contact.html">Videogames</a>
+              <a class="nav-link" href="{% url 'blog:tutorials' %}">Tutorials</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contact.html">Tutorials</a>
+              <a class="nav-link" href="{% url 'blog:contact' %}">Contact</a>
             </li>
           </ul>
         </div>
@@ -57,15 +57,15 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="masthead" style="background-image: url('{% static 'img/home-bg.jpg' %}')">
+    <header class="masthead" style="background-image: url('{% block main_image %}{% static 'img/home-bg.jpg' %}{% endblock main_image %}')">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="site-heading">
-              <h1>Django Blog</h1>
+              <h1>{% block main_title %}Django Blog{% endblock main_title %}</h1>
               <span class="subheading">A Blog example</span>
-              <span class="subheading"> Backend built with Django / Frontend Bootstrap-theme-example</span>
+              <span class="subheading">{% block short_description %}Backend built with Django / Frontend Bootstrap-theme-example{% endblock short_description %}</span>
             </div>
           </div>
         </div>
