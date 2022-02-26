@@ -1,5 +1,10 @@
 from .base import *
 
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = env.bool('DEBUG', default=False)
+
+ALLOWED_HOSTS = []
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
