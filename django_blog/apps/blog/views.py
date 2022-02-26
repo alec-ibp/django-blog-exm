@@ -1,16 +1,56 @@
-from django.shortcuts import render
+from .models import Category
+from .models import Post
+
+from django.shortcuts import render, get_object_or_404
+from django.db.models import Q
 
 
 def home(request):
-    return render(request, "index.html")
+    queryset = request.GET.get("search")
+
+    if queryset:
+        posts = Post.objects.filter(
+            Q(title__icontains = queryset) |
+            Q(description__icontains = queryset),
+            status = True
+        ).distinct()
+
+    else:
+        posts = Post.objects.filter(status = True)
+    return render(request, "index.html", {"posts": posts})
+
+
+def detail_post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    return render(request, "post.html", {"post": post})
 
 
 def general(request):
-    return render(request, "general.html")
+    queryset = request.GET.get("search")
+
+    if queryset:
+        posts = Post.objects.filter(
+            Q(title__icontains = queryset) |
+            Q(description__icontains = queryset),
+            status = True,
+            category = Category.objects.get(name__iexact = "General")
+        ).distinct()
+
+    else:
+        posts = Post.objects.filter(
+            status = True,
+            category = Category.objects.get(name__iexact = "General")
+        )
+        
+    return render(request, "general.html", {"posts": posts})
 
 
 def technology(request):
-    return render(request, "technology.html")
+    posts = Post.objects.filter(
+        status = True,
+        category = Category.objects.get(name__iexact = "Technology")
+    )
+    return render(request, "technology.html", {"posts": posts})
 
 
 def tutorials(request):

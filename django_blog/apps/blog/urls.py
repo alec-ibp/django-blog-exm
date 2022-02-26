@@ -1,4 +1,5 @@
 from .views import home
+from .views import detail_post
 from .views import general
 from .views import technology
 from .views import tutorials
@@ -13,4 +14,5 @@ urlpatterns = [
     path("technology/", technology, name="technology"),
     path("contact/", contact, name="contact"),
     path("tutorials/", tutorials, name="tutorials"),
+    path("<slug:slug>/", detail_post, name="detail_post"),
 ]
