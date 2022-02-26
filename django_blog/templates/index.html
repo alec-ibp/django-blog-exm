@@ -115,9 +115,19 @@
           {% endblock content %}
           
           <!-- Pager -->
-          <div class="clearfix">
-            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-          </div>
+          
+          {% if posts.has_previous %}
+            <div class="clearfix">
+              <a class="btn btn-primary float-right" href="?page={{posts.previous_page_number}}">Older Posts &rarr;</a>
+            </div>
+          {% endif %}
+
+          {% if posts.has_next %}
+            <div class="clearfix">
+              <a class="btn btn-primary float-right" href="?page={{posts.next_page_number}}">Next Posts &rarr;</a>
+            </div>
+          {% endif %}
+        
         </div>
       </div>
     </div>

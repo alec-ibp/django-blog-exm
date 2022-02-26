@@ -3,6 +3,7 @@ from .models import Post
 
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 def home(request):
@@ -17,6 +18,10 @@ def home(request):
 
     else:
         posts = Post.objects.filter(status = True)
+
+    paginator = Paginator(posts, 1)
+    page = request.GET.get("page")
+    posts = paginator.get_page(page)
     return render(request, "index.html", {"posts": posts})
 
 
@@ -41,7 +46,7 @@ def general(request):
             status = True,
             category = Category.objects.get(name__iexact = "General")
         )
-        
+
     return render(request, "general.html", {"posts": posts})
 
 
